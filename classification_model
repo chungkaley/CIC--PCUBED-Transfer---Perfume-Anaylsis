@@ -15,6 +15,7 @@ print("Summary statistics:\n", df.describe())
 # Check for missing values
 missing_values = df.isnull().sum()
 print("Missing Values:\n", missing_values)
+#Result = missing values
 
 # Handle missing values
 df['brand'].fillna('Unknown', inplace=True)
@@ -24,18 +25,20 @@ df['availableText'].fillna('Not Specified', inplace=True)
 df['lastUpdated'].fillna('Unknown', inplace=True)
 df.dropna(subset=['sold'], inplace=True)
 
+
 # Print updated missing values
 missing_values = df.isnull().sum()
 print("Missing Values After Cleaning:\n", missing_values)
+#Result = 0
 
-# Sales statistics
+#Finding statics of sold
 print("Lowest Sold:", df['sold'].min())
 print("Highest Sold:", df['sold'].max())
 print("Mean Sold:", df['sold'].mean())
 print("25th Percentile (Q1):", df['sold'].quantile(0.25))
 print("75th Percentile (Q3):", df['sold'].quantile(0.75))
 
-# Convert sold to binary class
+# Convert sold from float to binary class
 df['sales_class'] = df['sold'].apply(lambda x: 'High' if x > 263 else 'Low')
 df['sales_class_binary'] = df['sales_class'].map({'Low': 0, 'High': 1})
 
